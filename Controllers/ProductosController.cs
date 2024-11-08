@@ -14,25 +14,29 @@ public class ProductosController : Controller
         productoRepository = new SQLiteProductoRepository();
     }    
     [HttpGet]
-    public IActionResult Index(){
-        return View();
-    }
-    [HttpGet]
-    public IActionResult Listar()
+    public ActionResult Index()
     {
         List<Producto>? productos = productoRepository.obtenerProductos();
         return View(productos);
     }
     [HttpGet]
-    public IActionResult Crear()
+    public ActionResult Crear()
     {
         return View();
     }
-    public IActionResult Modificar()
+    // [HttpPost]
+    // public ActionResult Crear()
+    // {
+    //     return View();
+    // }
+    [HttpGet()]
+    public ActionResult Modificar()
     {
-        return View();
+        int id=1;
+        Producto p = productoRepository.obtenerProducto(id);
+        return View(p);
     }
-    public IActionResult Eliminar()
+    public ActionResult Eliminar()
     {
         return View();
     }
