@@ -22,21 +22,29 @@ public class ProductosController : Controller
     [HttpGet]
     public ActionResult Crear()
     {
-        return View();
+        return View(new Producto());
     }
-    // [HttpPost]
-    // public ActionResult Crear()
-    // {
-    //     return View();
-    // }
-    [HttpGet()]
-    public ActionResult Modificar()
+    [HttpPost]
+    public ActionResult Crear(Producto p)
     {
-        int id=1;
+        productoRepository.crearProducto(p.Descripcion,p.Precio);
+        return RedirectToAction("Index");
+    }
+    [HttpGet()]
+    public ActionResult Modificar(int id)
+    {
         Producto p = productoRepository.obtenerProducto(id);
         return View(p);
     }
-    public ActionResult Eliminar()
+
+    [HttpPost()]
+    public ActionResult Modificar(Producto p)
+    {
+        productoRepository.modificarProducto(p.IdProducto,p.Descripcion,p.Precio);
+        return RedirectToAction("Index");
+    }
+    [HttpGet()]
+    public ActionResult Eliminar(int id)
     {
         return View();
     }
