@@ -1,1 +1,7 @@
-<h1>Hola mundo</h1>
+@model List<TiendaNamespace.Producto>
+<ul>
+    @foreach(var p in Model){
+        <li>@p.IdProducto</li>
+    }
+</ul>
+<h1>Hola mundo</h1>    
