@@ -13,14 +13,17 @@ public class ProductosController : Controller
     {
         productoRepository = new SQLiteProductoRepository();
     }    
+    [HttpGet]
     public IActionResult Index(){
         return View();
     }
+    [HttpGet]
     public IActionResult Listar()
     {
         List<Producto>? productos = productoRepository.obtenerProductos();
         return View(productos);
     }
+    [HttpGet]
     public IActionResult Crear()
     {
         return View();
