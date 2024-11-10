@@ -25,7 +25,9 @@
                 <td>@p.Precio</td>
                 <td class="d-flex justify-content-evenly">
                     <a asp-controller="Productos" asp-action="Modificar" asp-route-id = "@p.IdProducto"class="btn btn-info">Modificar</a>
-                    <a asp-controller="Productos" asp-action="Eliminar" asp-route-id = "@p.IdProducto" class="btn btn-danger">Eliminar</a>
+                    <form method="post">
+                    <button asp-controller="Productos" asp-action="Eliminar" asp-route-id = "@p.IdProducto" class="btn btn-danger" onclick=" return confirm('¿Estás seguro de que quieres eliminar este producto?');">Eliminar</button>
+                    </form>
                 </td>
             </tr>
         }

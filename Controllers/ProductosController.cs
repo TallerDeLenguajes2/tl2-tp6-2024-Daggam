@@ -43,9 +43,10 @@ public class ProductosController : Controller
         productoRepository.modificarProducto(p.IdProducto,p.Descripcion,p.Precio);
         return RedirectToAction("Index");
     }
-    [HttpGet()]
+    [HttpPost()]
     public ActionResult Eliminar(int id)
     {
-        return View();
+        productoRepository.eliminarProducto(id);   
+        return RedirectToAction("Index");
     }
 }
