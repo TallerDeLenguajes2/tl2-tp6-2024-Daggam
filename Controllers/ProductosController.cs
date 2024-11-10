@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductoRepositoryNamespace;
 using TiendaNamespace;
-using tl2_tp6_2024_Daggam.Models;
 
 namespace tl2_tp6_2024_Daggam.Controllers;
 
