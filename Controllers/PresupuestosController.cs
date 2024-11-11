@@ -37,4 +37,9 @@ public class PresupuestosController : Controller
         presupuestoRespository.AgregarDetallePresupuesto(p.IdPresupuesto,p.Detalle[0].Producto.IdProducto,p.Detalle[0].Cantidad);
         return RedirectToAction("Index");
     }
+    [HttpPost]
+    public ActionResult Eliminar(int id){
+        presupuestoRespository.EliminarPresupuesto(id);
+        return RedirectToAction("Index");
+    }
 }
