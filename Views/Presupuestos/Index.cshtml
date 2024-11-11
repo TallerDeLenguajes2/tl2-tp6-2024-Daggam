@@ -33,7 +33,7 @@
                 }
                 <td rowspan=@filasSize >
                     <div class="d-flex justify-content-evenly my-auto">
-                        <a asp-controller="Presupuestos" asp-action="Modificar" asp-route-id = "@p.IdPresupuesto"class="btn btn-info">Modificar</a>
+                        <a asp-controller="Presupuestos" asp-action="Agregar" asp-route-id = "@p.IdPresupuesto"class="btn btn-info">Modificar</a>
                         <form method="post">
                         <button asp-controller="Presupuestos" asp-action="Eliminar" asp-route-id = "@p.IdPresupuesto" class="btn btn-danger" onclick=" return confirm('¿Estás seguro de que quieres eliminar este presupuesto?');">Eliminar</button>
                         </form>

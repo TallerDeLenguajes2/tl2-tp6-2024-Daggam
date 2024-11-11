@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Crear presupuesto";
+}
+
+@model TiendaNamespace.Presupuesto
+<div class = "row justify-content-center">
+    <div class = "col-6">
+        <h2 class="text-center mb-3">Crear un nuevo presupuesto</h2>
+        <form asp-controller="Presupuestos" asp-action="Crear"> 
+            <div class="mb-3">
+                <label asp-for=@Model.NombreDestinatario class="form-label">Nombre del destinatario</label>
+                <input asp-for=@Model.NombreDestinatario class="form-control" >
+            </div>
+            <div class = "d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -8,9 +8,9 @@ public class Presupuesto
     string nombreDestinatario;
     List<PresupuestoDetalle> detalle;
 
-    public int IdPresupuesto { get => idPresupuesto; }
+    public int IdPresupuesto { get => idPresupuesto; set => idPresupuesto = value;}
     public string NombreDestinatario { get => nombreDestinatario; set => nombreDestinatario = value; }
-    public List<PresupuestoDetalle> Detalle {get => detalle;}
+    public List<PresupuestoDetalle> Detalle {get => detalle; set => detalle = value;}
 
     //[JsonConstructor]
     public Presupuesto(){

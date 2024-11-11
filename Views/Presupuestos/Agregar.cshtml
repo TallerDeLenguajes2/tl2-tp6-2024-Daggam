@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Agregar producto a presupuesto";
+}
+
+@model TiendaNamespace.Presupuesto
+<div class = "row justify-content-center">
+    <div class = "col-6">
+        <h2 class="text-center mb-3">Agregar un producto al presupuesto</h2>
+        <form asp-controller="Presupuestos" asp-action="Agregar"> 
+            <input hidden asp-for="@Model.IdPresupuesto">
+            <div class="mb-3">
+                <label asp-for=@Model.Detalle[0].Producto.IdProducto class="form-label">ID del producto</label>
+                <input asp-for=@Model.Detalle[0].Producto.IdProducto class="form-control" >
+            </div>
+            <div class="mb-3">
+                <label asp-for=@Model.Detalle[0].Cantidad class="form-label">Cantidad</label>
+                <input asp-for=@Model.Detalle[0].Cantidad class="form-control">
+            </div>
+            <div class = "d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,8 +1,6 @@
 namespace PresupuestoRepositoryNamespace;
 
-using System.Data;
 using Microsoft.Data.Sqlite;
-using SQLitePCL;
 using TiendaNamespace;
 
 interface PresupuestoRepository
@@ -11,11 +9,7 @@ interface PresupuestoRepository
     List<Presupuesto>? ObtenerPresupuestos();
     Presupuesto? ObtenerPresupuesto(int id);
     bool AgregarDetallePresupuesto(int idPresupuesto, int idProducto, int cantidad);
-    // bool modificarProducto(int idProducto, string descripcion, int precio);
-    // List<Producto>? obtenerProductos();
-    // Producto? obtenerProducto(int id);
-
-    // bool eliminarProducto(int id);
+    bool EliminarPresupuesto(int id);
 }
 
 class SQLitePresupuestoRepository : PresupuestoRepository
@@ -142,4 +136,24 @@ class SQLitePresupuestoRepository : PresupuestoRepository
         }
         return false;
     }
+
+    public bool EliminarPresupuesto(int id)
+    {
+        try
+        {
+            using(var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                string queryString = "DELETE FROM Presupuestos WHERE idPresupuesto = @idPresupuesto;";
+                var command = new SqliteCommand(queryString,connection);
+                command.Parameters.AddWithValue("@idPresupuesto",id);
+                int filasAfectadas = command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return true;
+        }catch(SqliteException e){
+            Console.WriteLine(e.Message);
+        }
+        return false;
+    }        
 }
