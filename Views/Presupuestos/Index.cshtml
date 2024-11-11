@@ -1,1 +1,52 @@
-<h1>Hola mundo</h1>
+@{
+    ViewData["Title"] = "Mis Presupuestos";
+}
+
+@model List<TiendaNamespace.Presupuesto>
+<h2 class="text-center">Mis Presupuestos</h2>
+<div class="d-flex justify-content-evenly my-4">
+    <a asp-controller="Presupuestos" asp-action="Crear" class="btn btn-success">Agregar un Presupuesto</a>
+</div>
+
+<table class = "table align-middle">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Destinatario</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var p in Model){
+            int filasSize = p.Detalle.Count==0 ? 1:p.Detalle.Count;
+            <tr>
+                <th rowspan="@filasSize" scope="row">@p.IdPresupuesto</th>
+                <td rowspan="@filasSize">@p.NombreDestinatario</td>
+                @if(p.Detalle.Count!=0){
+                    <td>@p.Detalle[0].Producto.Descripcion</td>
+                    <td>@p.Detalle[0].Cantidad</td>
+                }else{
+                    <td>-</td>
+                    <td>-</td>
+                }
+                <td rowspan=@filasSize >
+                    <div class="d-flex justify-content-evenly my-auto">
+                        <a asp-controller="Presupuestos" asp-action="Modificar" asp-route-id = "@p.IdPresupuesto"class="btn btn-info">Modificar</a>
+                        <form method="post">
+                        <button asp-controller="Presupuestos" asp-action="Eliminar" asp-route-id = "@p.IdPresupuesto" class="btn btn-danger" onclick=" return confirm('¿Estás seguro de que quieres eliminar este presupuesto?');">Eliminar</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @for(int i=1;i<p.Detalle.Count;i++){
+                <tr>
+                    <td>@p.Detalle[i].Producto.Descripcion</td>
+                    <td>@p.Detalle[i].Cantidad</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

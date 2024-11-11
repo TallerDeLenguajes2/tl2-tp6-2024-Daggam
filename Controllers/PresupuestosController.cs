@@ -13,6 +13,7 @@ public class PresupuestosController : Controller
     }    
     [HttpGet]
     public ActionResult Index(){
-        return View();
+        var presupuestos = presupuestoRespository.ObtenerPresupuestos();
+        return View(presupuestos);
     }
 }
