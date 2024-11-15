@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tl2-tp6-2024-Daggam")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a9041bc01a8fd2f45b5e8ea4c30502c10609b16")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82842a20ec674edcded09f097cefd07efa12f3c6")]
 [assembly: System.Reflection.AssemblyProductAttribute("tl2-tp6-2024-Daggam")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tl2-tp6-2024-Daggam")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

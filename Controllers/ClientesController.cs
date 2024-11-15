@@ -18,4 +18,28 @@ public class ClientesController : Controller
         List<Cliente>? clientes = clienteRepository.obtenerClientes();
         return View(clientes);
     }
+    [HttpGet]
+    public ActionResult Crear()
+    {
+        return View(new Cliente());
+    }
+    [HttpPost]
+    public ActionResult Crear(Cliente p)
+    {
+        clienteRepository.crearCliente(p);
+        return RedirectToAction("Index");
+    }
+    [HttpGet]
+    public ActionResult Modificar(int id)
+    {
+        Cliente c = clienteRepository.obtenerCliente(id);
+        return View(c);
+    }
+    [HttpPost]
+    public ActionResult Modificar(Cliente c)
+    {
+        clienteRepository.modificarCliente(c);
+        return RedirectToAction("Index");
+    }
+    
 }
