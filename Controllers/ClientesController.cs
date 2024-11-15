@@ -41,5 +41,11 @@ public class ClientesController : Controller
         clienteRepository.modificarCliente(c);
         return RedirectToAction("Index");
     }
-    
+
+    [HttpPost]
+    public ActionResult Eliminar(int id)
+    {
+        clienteRepository.eliminarCliente(id);
+        return RedirectToAction("Index"); 
+    }
 }
