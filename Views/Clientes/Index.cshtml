@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Mis Clientes";
+}
+
+@model List<TiendaNamespace.Cliente>
+<h2 class="text-center">Mis clientes</h2>
+<div class="d-flex justify-content-evenly my-4">
+    <a asp-controller="Clientes" asp-action="Crear" class="btn btn-success">Agregar un Cliente</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <th scope="row">@c.IdCliente</th>
+                <td>@c.Nombre</td>
+                <td>@c.Email</td>
+                <td>@c.Telefono</td>
+                <td class="d-flex justify-content-evenly">
+                    <a asp-controller="Clientes" asp-action="Modificar" asp-route-id="@c.IdCliente"
+                        class="btn btn-info">Modificar</a>
+                    <form method="post">
+                        <button asp-controller="Clientes" asp-action="Eliminar" asp-route-id="@c.IdCliente"
+                            class="btn btn-danger"
+                            onclick=" return confirm('¿Estás seguro de que quieres eliminar este cliente?');">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

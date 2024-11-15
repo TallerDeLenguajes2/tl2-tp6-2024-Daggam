@@ -1,4 +1,4 @@
-namespace ClienteRepository;
+namespace ClienteRepositoryNamespace;
 using Microsoft.Data.Sqlite;
 using TiendaNamespace;
 
@@ -12,7 +12,7 @@ interface ClienteRepository
     bool eliminarCliente(int id);
 }
 
-class SQLiteProductoRepository : ClienteRepository
+class SQLiteClienteRepository : ClienteRepository
 {
     string connectionString = @"Data Source=db\Tienda.db;Cache=Shared";
     public bool crearCliente(Cliente c)
