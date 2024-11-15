@@ -23,7 +23,7 @@
             int filasSize = p.Detalle.Count==0 ? 1:p.Detalle.Count;
             <tr>
                 <th rowspan="@filasSize" scope="row">@p.IdPresupuesto</th>
-                <td rowspan="@filasSize">@p.NombreDestinatario</td>
+                <td rowspan="@filasSize">@p.Cliente.Nombre</td>
                 @if(p.Detalle.Count!=0){
                     <td>@p.Detalle[0].Producto.Descripcion</td>
                     <td>@p.Detalle[0].Cantidad</td>

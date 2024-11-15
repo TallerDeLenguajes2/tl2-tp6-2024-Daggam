@@ -5,20 +5,20 @@ namespace TiendaNamespace;
 public class Presupuesto
 {
     int idPresupuesto;
-    string nombreDestinatario;
+    Cliente cliente;
     List<PresupuestoDetalle> detalle;
 
     public int IdPresupuesto { get => idPresupuesto; set => idPresupuesto = value;}
-    public string NombreDestinatario { get => nombreDestinatario; set => nombreDestinatario = value; }
+    public Cliente Cliente { get => cliente; set => cliente = value; }
     public List<PresupuestoDetalle> Detalle {get => detalle; set => detalle = value;}
 
     //[JsonConstructor]
     public Presupuesto(){
         detalle = new List<PresupuestoDetalle>();
     }
-    public Presupuesto(int idPresupuesto, string nombreDestinatario, List<PresupuestoDetalle> detalle){
+    public Presupuesto(int idPresupuesto, Cliente cliente, List<PresupuestoDetalle> detalle){
         this.idPresupuesto = idPresupuesto;
-        this.nombreDestinatario = nombreDestinatario;
+        this.cliente = cliente;
         this.detalle = detalle;
     } 
     

@@ -22,7 +22,7 @@ public class PresupuestosController : Controller
     }
     [HttpPost]
     public ActionResult Crear(Presupuesto p){
-        presupuestoRespository.CrearPresupuesto(p.NombreDestinatario);
+        presupuestoRespository.CrearPresupuesto(p.Cliente.IdCliente);
         return RedirectToAction("Index");
     }
     [HttpGet]

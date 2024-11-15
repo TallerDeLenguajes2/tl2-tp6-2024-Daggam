@@ -5,7 +5,7 @@ using TiendaNamespace;
 
 interface PresupuestoRepository
 {
-    bool CrearPresupuesto(string nombreDestinatario);
+    bool CrearPresupuesto(int id_cliente);
     List<Presupuesto>? ObtenerPresupuestos();
     Presupuesto? ObtenerPresupuesto(int id);
     bool AgregarDetallePresupuesto(int idPresupuesto, int idProducto, int cantidad);
@@ -15,16 +15,16 @@ interface PresupuestoRepository
 class SQLitePresupuestoRepository : PresupuestoRepository
 {
     string connectionString = @"Data Source=db\Tienda.db;Cache=Shared";
-    public bool CrearPresupuesto(string nombreDestinatario)
+    public bool CrearPresupuesto(int id_cliente)
     {
         try
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
-                string queryString = @"INSERT INTO Presupuestos (NombreDestinatario, FechaCreacion) VALUES (@NombreDestinatario, @FechaCreacion);";
+                string queryString = @"INSERT INTO Presupuestos (id_cliente, FechaCreacion) VALUES (@id_cliente, @FechaCreacion);";
                 var command = new SqliteCommand(queryString, connection);
-                command.Parameters.AddWithValue("@NombreDestinatario", nombreDestinatario);
+                command.Parameters.AddWithValue("@id_cliente", id_cliente);
                 command.Parameters.AddWithValue("@FechaCreacion",DateTime.Now.ToString("yyyy-MM-dd"));
                 int filasAfectadas = command.ExecuteNonQuery();
                 connection.Close();
@@ -56,7 +56,8 @@ class SQLitePresupuestoRepository : PresupuestoRepository
                 using(var reader = command.ExecuteReader()){
                     while(reader.Read()){
                         int idPresupuesto = reader.GetInt32(0);
-                        string nombreDestinatario = reader.GetString(1);
+                        Cliente cliente=null;
+                        // int idCliente = reader.GetInt32(1);
                         List<PresupuestoDetalle> detalles = new List<PresupuestoDetalle>();
                         //Todo lo necesario para obtener los productos de un PresupuestoDetalle dado un idPresupuesto
                         string queryDetalles = @"SELECT idProducto,Descripcion,Precio,Cantidad FROM PresupuestosDetalle
@@ -70,7 +71,18 @@ class SQLitePresupuestoRepository : PresupuestoRepository
                                 detalles.Add(new PresupuestoDetalle(p,reader2.GetInt32(3)));        
                             }
                         }
-                        presupuestos.Add(new Presupuesto(idPresupuesto,nombreDestinatario, detalles));
+                        //Query para obtener al cliente
+                        string querycliente = @"SELECT id_cliente, nombre, email, telefono FROM clientes
+                        INNER JOIN Presupuestos USING(id_cliente)
+                        WHERE idPresupuesto=@idPresupuesto;";
+                        var commandCliente = new SqliteCommand(querycliente,connection);
+                        commandCliente.Parameters.AddWithValue("@idPresupuesto",idPresupuesto);
+                        using(var reader2 = commandCliente.ExecuteReader()){
+                            while(reader2.Read()){
+                                cliente = new Cliente(reader2.GetInt32(0),reader2.GetString(1),reader2.GetString(2),reader2.GetString(3));
+                            }
+                        }
+                        presupuestos.Add(new Presupuesto(idPresupuesto,cliente, detalles));
                     }
                 }
                 connection.Close();
@@ -93,7 +105,7 @@ class SQLitePresupuestoRepository : PresupuestoRepository
                 using(var reader = commandPresupuesto.ExecuteReader()){
                     while(reader.Read()){
                         int idPresupuesto = reader.GetInt32(0);
-                        string nombreDestinatario = reader.GetString(1);
+                        Cliente cliente=null;
                         List<PresupuestoDetalle> detalles = new List<PresupuestoDetalle>();
                         //Todo lo necesario para obtener los productos de un PresupuestoDetalle dado un idPresupuesto
                         string queryDetalles = @"SELECT idProducto,Descripcion,Precio,Cantidad FROM PresupuestosDetalle
@@ -107,7 +119,18 @@ class SQLitePresupuestoRepository : PresupuestoRepository
                                 detalles.Add(new PresupuestoDetalle(p,reader2.GetInt32(3)));        
                             }
                         }
-                        presupuesto = new Presupuesto(idPresupuesto,nombreDestinatario, detalles);
+                        //Query para obtener al cliente
+                        string querycliente = @"SELECT id_cliente, nombre, email, telefono FROM clientes
+                        INNER JOIN Presupuestos USING(id_cliente)
+                        WHERE idPresupuesto=@idPresupuesto;";
+                        var commandCliente = new SqliteCommand(querycliente,connection);
+                        commandCliente.Parameters.AddWithValue("@idPresupuesto",idPresupuesto);
+                        using(var reader2 = commandCliente.ExecuteReader()){
+                            while(reader2.Read()){
+                                cliente = new Cliente(reader2.GetInt32(0),reader2.GetString(1),reader2.GetString(2),reader2.GetString(3));
+                            }
+                        }
+                        presupuesto = new Presupuesto(idPresupuesto,cliente, detalles);
                     }
                 }                
                 connection.Close();
