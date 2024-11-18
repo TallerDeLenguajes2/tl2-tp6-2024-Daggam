@@ -2,7 +2,12 @@
     ViewData["Title"] = "Crear producto";
 }
 
-@model TiendaNamespace.Producto
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
+@model ViewModel.ProductosViewModel
 <div class = "row justify-content-center">
     <div class = "col-6">
         <h2 class="text-center mb-3">Crear un nuevo producto</h2>
@@ -10,10 +15,12 @@
             <div class="mb-3">
                 <label asp-for=@Model.Descripcion class="form-label">Descripcion</label>
                 <input asp-for=@Model.Descripcion class="form-control" >
+                <span class="text-danger" asp-validation-for=@Model.Descripcion></span>
             </div>
             <div class="mb-3">
                 <label asp-for=@Model.Precio class="form-label">Precio</label>
-                <input asp-for=@Model.Precio type="number" class="form-control">
+                <input asp-for=@Model.Precio class="form-control">
+                <span class="text-danger" asp-validation-for=@Model.Precio></span>
             </div>
             <div class = "d-flex justify-content-center">
                 <button type="submit" class="btn btn-success">Enviar</button>

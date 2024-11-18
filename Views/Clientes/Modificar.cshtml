@@ -1,8 +1,13 @@
 @{
     ViewData["Title"] = "Modificar Cliente";
 }
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-@model TiendaNamespace.Cliente
+    }
+@model ViewModel.ClienteViewModel
 <div class="row justify-content-center">
     <div class="col-6">
         <h2 class="text-center mb-3">Modificar Cliente</h2>
@@ -11,14 +16,17 @@
             <div class="mb-3">
                 <label asp-for=@Model.Nombre class="form-label">Nombre</label>
                 <input asp-for=@Model.Nombre class="form-control">
+                <span class="text-danger" asp-validation-for=@Model.Nombre></span>
             </div>
             <div class="mb-3">
                 <label asp-for=@Model.Email class="form-label">Email</label>
                 <input asp-for=@Model.Email class="form-control">
+                <span class="text-danger" asp-validation-for=@Model.Email></span>
             </div>
             <div class="mb-3">
                 <label asp-for=@Model.Telefono class="form-label">Telefono</label>
                 <input asp-for=@Model.Telefono class="form-control">
+                <span class="text-danger" asp-validation-for=@Model.Telefono></span>
             </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-success">Enviar</button>

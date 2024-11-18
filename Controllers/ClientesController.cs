@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ClienteRepositoryNamespace;
 using TiendaNamespace;
+using ViewModel;
 namespace tl2_tp6_2024_Daggam.Controllers;
 
 public class ClientesController : Controller
@@ -21,24 +22,36 @@ public class ClientesController : Controller
     [HttpGet]
     public ActionResult Crear()
     {
-        return View(new Cliente());
+        return View(new ClienteViewModel());
     }
     [HttpPost]
-    public ActionResult Crear(Cliente p)
+    public ActionResult Crear(ClienteViewModel cvw)
     {
-        clienteRepository.crearCliente(p);
+        if(ModelState.IsValid){
+            Cliente c = new Cliente(cvw.IdCliente,cvw.Nombre,cvw.Email,cvw.Telefono);
+            clienteRepository.crearCliente(c);
+        }
         return RedirectToAction("Index");
     }
     [HttpGet]
     public ActionResult Modificar(int id)
     {
         Cliente c = clienteRepository.obtenerCliente(id);
-        return View(c);
+        ClienteViewModel cvw = new ClienteViewModel(){
+            IdCliente=c.IdCliente,
+            Nombre = c.Nombre,
+            Email = c.Email,
+            Telefono = c.Telefono
+        };
+        return View(cvw);
     }
     [HttpPost]
-    public ActionResult Modificar(Cliente c)
+    public ActionResult Modificar(ClienteViewModel cvw)
     {
-        clienteRepository.modificarCliente(c);
+        if(ModelState.IsValid){
+            Cliente c = new Cliente(cvw.IdCliente,cvw.Nombre,cvw.Email,cvw.Telefono);
+            clienteRepository.modificarCliente(c);
+        }
         return RedirectToAction("Index");
     }
 

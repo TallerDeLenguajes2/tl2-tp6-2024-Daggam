@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductoRepositoryNamespace;
 using TiendaNamespace;
+using ViewModel;
 
 namespace tl2_tp6_2024_Daggam.Controllers;
 
@@ -21,25 +22,30 @@ public class ProductosController : Controller
     [HttpGet]
     public ActionResult Crear()
     {
-        return View(new Producto());
+        return View(new ProductosViewModel());
     }
     [HttpPost]
-    public ActionResult Crear(Producto p)
+    public ActionResult Crear(ProductosViewModel p)
     {
-        productoRepository.crearProducto(p.Descripcion,p.Precio);
+        if(ModelState.IsValid) productoRepository.crearProducto(p.Descripcion,p.Precio);
         return RedirectToAction("Index");
     }
     [HttpGet()]
     public ActionResult Modificar(int id)
     {
         Producto p = productoRepository.obtenerProducto(id);
-        return View(p);
+        ProductosViewModel pvm = new ProductosViewModel(){
+            IdProducto = p.IdProducto,
+            Descripcion = p.Descripcion,
+            Precio = p.Precio
+        };
+        return View(pvm);
     }
 
     [HttpPost()]
-    public ActionResult Modificar(Producto p)
+    public ActionResult Modificar(ProductosViewModel p)
     {
-        productoRepository.modificarProducto(p.IdProducto,p.Descripcion,p.Precio);
+        if(ModelState.IsValid) productoRepository.modificarProducto(p.IdProducto,p.Descripcion,p.Precio);
         return RedirectToAction("Index");
     }
     [HttpPost()]
