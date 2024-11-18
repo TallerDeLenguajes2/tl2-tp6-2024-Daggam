@@ -2,10 +2,35 @@
     ViewData["Title"] = "Agregar producto a presupuesto";
 }
 
-@model TiendaNamespace.Presupuesto
+@model ViewModel.AgregarProductoPresupuestoViewModel
 <div class = "row justify-content-center">
     <div class = "col-6">
         <h2 class="text-center mb-3">Agregar un producto al presupuesto</h2>
+        <table class = "table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Precio</th>
+            <th scope="col">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var p in Model.Productos){
+            <tr>
+                <th scope="row">@p.IdProducto</th>
+                <td>@p.Descripcion</td>
+                <td>@p.Precio</td>
+                <td class="d-flex justify-content-evenly">
+                    <a asp-controller="Presupuestos" asp-action="AgregarCantidad" asp-route-idProducto = "@p.IdProducto" asp-route-idPresupuesto = "@Model.IdPresupuesto" class="btn btn-info">Añadir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+        @{/*
         <form asp-controller="Presupuestos" asp-action="Agregar"> 
             <input hidden asp-for="@Model.IdPresupuesto">
             <div class="mb-3">
@@ -20,5 +45,6 @@
                 <button type="submit" class="btn btn-success">Enviar</button>
             </div>
         </form>
+        */}
     </div>
 </div>
