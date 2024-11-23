@@ -3,7 +3,7 @@ namespace PresupuestoRepositoryNamespace;
 using Microsoft.Data.Sqlite;
 using TiendaNamespace;
 
-interface PresupuestoRepository
+public interface IPresupuestoRepository
 {
     bool CrearPresupuesto(string nombreDestinatario);
     List<Presupuesto>? ObtenerPresupuestos();
@@ -12,7 +12,7 @@ interface PresupuestoRepository
     bool EliminarPresupuesto(int id);
 }
 
-class SQLitePresupuestoRepository : PresupuestoRepository
+public class SQLitePresupuestoRepository : IPresupuestoRepository
 {
     string connectionString = @"Data Source=db\Tienda.db;Cache=Shared";
     public bool CrearPresupuesto(string nombreDestinatario)

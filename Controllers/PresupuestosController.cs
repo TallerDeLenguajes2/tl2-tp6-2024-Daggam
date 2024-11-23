@@ -6,14 +6,14 @@ namespace tl2_tp6_2024_Daggam.Controllers;
 
 public class PresupuestosController : Controller
 {
-    PresupuestoRepository presupuestoRespository;
-    public PresupuestosController()
+    readonly IPresupuestoRepository _presupuestoRespository;
+    public PresupuestosController(IPresupuestoRepository presupuestoRepository)
     {
-        presupuestoRespository = new SQLitePresupuestoRepository();
+        _presupuestoRespository = presupuestoRepository;
     }    
     [HttpGet]
     public ActionResult Index(){
-        var presupuestos = presupuestoRespository.ObtenerPresupuestos();
+        var presupuestos = _presupuestoRespository.ObtenerPresupuestos();
         return View(presupuestos);
     }
     [HttpGet]
@@ -22,7 +22,7 @@ public class PresupuestosController : Controller
     }
     [HttpPost]
     public ActionResult Crear(Presupuesto p){
-        presupuestoRespository.CrearPresupuesto(p.NombreDestinatario);
+        _presupuestoRespository.CrearPresupuesto(p.NombreDestinatario);
         return RedirectToAction("Index");
     }
     [HttpGet]
@@ -34,12 +34,12 @@ public class PresupuestosController : Controller
     }
     [HttpPost]
     public ActionResult Agregar(Presupuesto p){
-        presupuestoRespository.AgregarDetallePresupuesto(p.IdPresupuesto,p.Detalle[0].Producto.IdProducto,p.Detalle[0].Cantidad);
+        _presupuestoRespository.AgregarDetallePresupuesto(p.IdPresupuesto,p.Detalle[0].Producto.IdProducto,p.Detalle[0].Cantidad);
         return RedirectToAction("Index");
     }
     [HttpPost]
     public ActionResult Eliminar(int id){
-        presupuestoRespository.EliminarPresupuesto(id);
+        _presupuestoRespository.EliminarPresupuesto(id);
         return RedirectToAction("Index");
     }
 }

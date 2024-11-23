@@ -2,7 +2,7 @@ namespace ProductoRepositoryNamespace;
 using Microsoft.Data.Sqlite;
 using TiendaNamespace;
 
-interface ProductoRepository
+public interface IProductoRepository
 {
     bool crearProducto(string descripcion, int precio);
     bool modificarProducto(int idProducto, string descripcion, int precio);
@@ -12,7 +12,7 @@ interface ProductoRepository
     bool eliminarProducto(int id);
 }
 
-class SQLiteProductoRepository : ProductoRepository
+public class SQLiteProductoRepository : IProductoRepository
 {
     string connectionString = @"Data Source=db\Tienda.db;Cache=Shared";
     public bool crearProducto(string descripcion, int precio)

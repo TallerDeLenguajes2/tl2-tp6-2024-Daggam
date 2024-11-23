@@ -6,16 +6,16 @@ namespace tl2_tp6_2024_Daggam.Controllers;
 
 public class ProductosController : Controller
 {
-    ProductoRepository productoRepository;
+    readonly IProductoRepository _productoRepository;
 
-    public ProductosController()
+    public ProductosController(IProductoRepository productoRepository)
     {
-        productoRepository = new SQLiteProductoRepository();
+        _productoRepository = productoRepository;
     }    
     [HttpGet]
     public ActionResult Index()
     {
-        List<Producto>? productos = productoRepository.obtenerProductos();
+        List<Producto>? productos = _productoRepository.obtenerProductos();
         return View(productos);
     }
     [HttpGet]
@@ -26,26 +26,26 @@ public class ProductosController : Controller
     [HttpPost]
     public ActionResult Crear(Producto p)
     {
-        productoRepository.crearProducto(p.Descripcion,p.Precio);
+        _productoRepository.crearProducto(p.Descripcion,p.Precio);
         return RedirectToAction("Index");
     }
     [HttpGet()]
     public ActionResult Modificar(int id)
     {
-        Producto p = productoRepository.obtenerProducto(id);
+        Producto p = _productoRepository.obtenerProducto(id);
         return View(p);
     }
 
     [HttpPost()]
     public ActionResult Modificar(Producto p)
     {
-        productoRepository.modificarProducto(p.IdProducto,p.Descripcion,p.Precio);
+        _productoRepository.modificarProducto(p.IdProducto,p.Descripcion,p.Precio);
         return RedirectToAction("Index");
     }
     [HttpPost()]
     public ActionResult Eliminar(int id)
     {
-        productoRepository.eliminarProducto(id);   
+        _productoRepository.eliminarProducto(id);   
         return RedirectToAction("Index");
     }
 }
