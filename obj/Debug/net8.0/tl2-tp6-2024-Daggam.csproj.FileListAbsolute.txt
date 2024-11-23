@@ -112,3 +112,4 @@ C:\Users\Alumno\Desktop\tl2-tp6-2024-Daggam\obj\Debug\net8.0\refint\tl2-tp6-2024
 C:\Users\Alumno\Desktop\tl2-tp6-2024-Daggam\obj\Debug\net8.0\tl2-tp6-2024-Daggam.pdb
 C:\Users\Alumno\Desktop\tl2-tp6-2024-Daggam\obj\Debug\net8.0\tl2-tp6-2024-Daggam.genruntimeconfig.cache
 C:\Users\Alumno\Desktop\tl2-tp6-2024-Daggam\obj\Debug\net8.0\ref\tl2-tp6-2024-Daggam.dll
+C:\Users\Admin\Desktop\Facultad\3 - TERCER ANIO\SEGUNDO CUATRIMESTRE\Taller de Lenguajes II\tl2-tp6-2024-Daggam\bin\Debug\net8.0\System.Security.Permissions.dll
