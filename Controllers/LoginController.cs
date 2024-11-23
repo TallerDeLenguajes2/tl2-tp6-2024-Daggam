@@ -19,7 +19,7 @@ public class LoginController:Controller{
         Usuario? usuario = _usuarioRepository.obtenerUsuario(loginVM.Usuario,loginVM.Password);
         if(usuario!=null){
             HttpContext.Session.SetString("Rol",usuario.Rol);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","Productos");
             
         }
         return RedirectToAction("Index");
