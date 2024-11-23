@@ -1,5 +1,6 @@
 using PresupuestoRepositoryNamespace;
 using ProductoRepositoryNamespace;
+using UsuarioRepositoryNamespace;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +9,8 @@ builder.Services.AddControllersWithViews();
 //Agregamos los repositorios aquí.
 builder.Services.AddScoped<IPresupuestoRepository,SQLitePresupuestoRepository>();
 builder.Services.AddScoped<IProductoRepository,SQLiteProductoRepository>();
+builder.Services.AddScoped<IUsuarioRepository,SQLiteUsuarioRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
